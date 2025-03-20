@@ -17,6 +17,7 @@ void set_initial_state(game_t *game)
     else if (kb_IsDown(kb_KeyLeft) && game->cursor.x > 0) game->cursor.x--;
     else if (kb_IsDown(kb_KeyRight) && game->cursor.x < SCREEN_COLS - 1) game->cursor.x++;
     else if (kb_IsDown(kb_KeyEnter)) game->grid_a[game->cursor.y][game->cursor.x] ^= 1;
+    else if (kb_IsDown(kb_KeyClear)) memset(game->grid_a, 0, sizeof(game->grid_a));
 }
 
 u8 count_neighbors(game_t *game, u8 x, u8 y)
@@ -63,13 +64,18 @@ void draw_game(game_t *game)
     gfx_ZeroScreen();
 
     // Draw Board
+    gfx_SetColor(0xFF);
     for (u8 j = 0; j < SCREEN_ROWS; j++) {
         for (u8 i = 0; i < SCREEN_COLS; i++) {
-            gfx_SetColor(0xFF);
             gfx_Rectangle(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        }
+    }
 
+    // Draw Live Cells
+    gfx_SetColor(0x33);
+    for (u8 j = 0; j < SCREEN_ROWS; j++) {
+        for (u8 i = 0; i < SCREEN_COLS; i++) {
             if (game->grid_a[j][i]) {
-                gfx_SetColor(0x33);
                 gfx_FillRectangle(i * TILE_SIZE + 1, j * TILE_SIZE + 1, TILE_SIZE - 1, TILE_SIZE - 1);
             }
         }

@@ -19,14 +19,20 @@ int main()
     {
         // Keyboard State
         kb_Scan();
+        
         if (kb_IsDown(kb_KeyDel)) {
             game.state = QUIT;
             break;
-        } else if (kb_IsDown(kb_KeyAlpha)) game.state = (game.state == PLACE) ? RUN : PLACE;
+        } else if (kb_IsDown(kb_KeyAlpha)) {
+            game.state = (game.state == PLACE) ? RUN : PLACE;
+        }
 
         // Update
-        if (game.state == PLACE) set_initial_state(&game);
-        else update_game(&game);
+        if (game.state == PLACE) {
+            set_initial_state(&game);
+        } else {
+            update_game(&game);
+        }
 
         // Draw Game
         draw_game(&game);
