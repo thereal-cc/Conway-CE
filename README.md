@@ -15,6 +15,7 @@ Arrow Keys: Move the cursor to select a cell.
 Enter: Toggle a cell between alive and dead.  
 Alpha: Start or pause the simulation.  
 2nd: Exit the Program.  
+Clear: Reset Entire Board.
 
 ## Installation  
 
