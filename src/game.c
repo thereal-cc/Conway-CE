@@ -63,19 +63,14 @@ void draw_game(game_t *game)
 {
     gfx_ZeroScreen();
 
-    // Draw Board
-    gfx_SetColor(0xFF);
+    // Draw Board & Live Cells
     for (u8 j = 0; j < SCREEN_ROWS; j++) {
         for (u8 i = 0; i < SCREEN_COLS; i++) {
+            gfx_SetColor(0xFF);
             gfx_Rectangle(i * TILE_SIZE, j * TILE_SIZE, TILE_SIZE, TILE_SIZE);
-        }
-    }
 
-    // Draw Live Cells
-    gfx_SetColor(0x33);
-    for (u8 j = 0; j < SCREEN_ROWS; j++) {
-        for (u8 i = 0; i < SCREEN_COLS; i++) {
             if (game->grid_a[j][i]) {
+                gfx_SetColor(0x33);
                 gfx_FillRectangle(i * TILE_SIZE + 1, j * TILE_SIZE + 1, TILE_SIZE - 1, TILE_SIZE - 1);
             }
         }
